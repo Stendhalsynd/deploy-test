@@ -1,6 +1,7 @@
 const express = require("express");
 const { WebClient } = require("@slack/web-api");
 const schedule = require("node-schedule");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
