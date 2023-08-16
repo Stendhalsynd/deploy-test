@@ -5,9 +5,9 @@ const schedule = require("node-schedule");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const slackToken = process.env.SLACK_TOKEN; // Replace with your Slack token
+const slackToken = process.env.SLACK_TOKEN;
 const channelId = process.env.CHANEL_ID;
-const members = ["김종현", "장창현", "주상후", "홍지훈", "황동준"];
+const members = process.env.MEMBERS.split("|");
 const web = new WebClient(slackToken);
 
 app.listen(port, () => {
