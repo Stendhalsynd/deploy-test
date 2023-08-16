@@ -52,7 +52,7 @@ async function leaveComment(messageTs, memberNames) {
   }
 }
 
-// Monitor the channel for messages and add reminders
+// 채널의 메세지를 모니터링하고 리마인더 추가
 async function monitorChannelAndAddReminders() {
   try {
     const channelHistory = await web.conversations.history({
