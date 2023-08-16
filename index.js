@@ -11,6 +11,10 @@ const channelId = process.env.CHANEL_ID;
 const members = process.env.MEMBERS.split("|");
 const web = new WebClient(slackToken);
 
+app.get("/", (req, res) => {
+  res.send("서버 배포");
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
