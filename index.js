@@ -141,7 +141,7 @@ async function monitorChannelAndAddRemindersOver() {
 // });
 
 // 토요일 오전 10시에 리마인더
-schedule.scheduleJob({ dayOfWeek: 6, hour: 12, minute: 29 }, () => {
+schedule.scheduleJob({ dayOfWeek: 6, hour: 22, minute: 0 }, () => {
   monitorChannelAndAddReminders();
 });
 
