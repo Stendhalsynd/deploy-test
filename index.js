@@ -68,9 +68,9 @@ async function monitorChannelAndAddReminders() {
     const messages = channelHistory.messages;
 
     const week = getWeekNumber();
+
     for (const message of messages) {
       if (message.text.includes(`${week}주차 React 학습`)) {
-        console.log("실행");
         const threadReplies = await web.conversations.replies({
           channel: channelId,
           ts: message.ts,
@@ -80,7 +80,7 @@ async function monitorChannelAndAddReminders() {
 
         // Post a reminder as a reply to the message
         await web.chat.postMessage({
-          channel: channelId, // Replace with the channel ID
+          channel: channelId,
           text: reminderMessage,
           thread_ts: message.ts, // Reply to the specific thread
         });
@@ -106,7 +106,6 @@ async function monitorChannelAndAddRemindersOver() {
     for (const message of messages) {
       // console.log("message1 : ", message.text);
       if (message.text.includes(`${week}주차 React 학습`)) {
-        console.log("실행");
         const threadReplies = await web.conversations.replies({
           channel: channelId,
           ts: message.ts,
@@ -142,7 +141,7 @@ async function monitorChannelAndAddRemindersOver() {
 // });
 
 // 토요일 오전 10시에 리마인더
-schedule.scheduleJob({ dayOfWeek: 6, hour: 11, minute: 24 }, () => {
+schedule.scheduleJob({ dayOfWeek: 6, hour: 12, minute: 29 }, () => {
   monitorChannelAndAddReminders();
 });
 
