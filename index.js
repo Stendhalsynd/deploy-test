@@ -93,41 +93,41 @@ async function monitorChannelAndAddReminders() {
 
 // Monitor the channel for messages and add reminders
 async function monitorChannelAndAddRemindersOver() {
-  // try {
-  //   const channelHistory = await web.conversations.history({
-  //     channel: channelId, // Replace with the channel ID
-  //     count: 1, // Number of messages to fetch
-  //   });
-  //   const messages = channelHistory.messages;
-  //   const week = getWeekNumber();
-  //   for (const message of messages) {
-  //     // console.log("message1 : ", message.text);
-  //     if (message.text.includes(`${week}주차 React 학습`)) {
-  //       const threadReplies = await web.conversations.replies({
-  //         channel: channelId,
-  //         ts: message.ts,
-  //       });
-  //       // 댓글 작성자들의 Slack 프로필 이름을 추출합니다.
-  //       const commentAuthors = await Promise.all(
-  //         threadReplies.messages.map(async (reply) => {
-  //           const commenterName = await getUserInfo(reply.user);
-  //           return commenterName || reply.user; // 프로필 이름이 없는 경우에는 사용자 ID를 반환합니다.
-  //         })
-  //       );
-  //       // 댓글 작성 횟수가 2번 미만인 멤버를 찾습니다.
-  //       const lessThanTwoComments = members.filter((member) => {
-  //         const commentCount = commentAuthors.filter(
-  //           (author) => author === member
-  //         ).length;
-  //         return commentCount < 2;
-  //       });
-  //       // 댓글을 남길 멤버의 이름을 전달하여 댓글을 남깁니다.
-  //       await leaveComment(message.ts, lessThanTwoComments);
-  //     }
-  //   }
-  // } catch (error) {
-  //   console.error("Error:", error);
-  // }
+  try {
+    const channelHistory = await web.conversations.history({
+      channel: channelId, // Replace with the channel ID
+      count: 1, // Number of messages to fetch
+    });
+    const messages = channelHistory.messages;
+    const week = getWeekNumber();
+    for (const message of messages) {
+      // console.log("message1 : ", message.text);
+      if (message.text.includes(`${week}주차 React 학습`)) {
+        const threadReplies = await web.conversations.replies({
+          channel: channelId,
+          ts: message.ts,
+        });
+        // 댓글 작성자들의 Slack 프로필 이름을 추출합니다.
+        const commentAuthors = await Promise.all(
+          threadReplies.messages.map(async (reply) => {
+            const commenterName = await getUserInfo(reply.user);
+            return commenterName || reply.user; // 프로필 이름이 없는 경우에는 사용자 ID를 반환합니다.
+          })
+        );
+        // 댓글 작성 횟수가 2번 미만인 멤버를 찾습니다.
+        const lessThanTwoComments = members.filter((member) => {
+          const commentCount = commentAuthors.filter(
+            (author) => author === member
+          ).length;
+          return commentCount < 2;
+        });
+        // 댓글을 남길 멤버의 이름을 전달하여 댓글을 남깁니다.
+        await leaveComment(message.ts, lessThanTwoComments);
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 // 테스트용
@@ -141,6 +141,6 @@ schedule.scheduleJob({ dayOfWeek: 6, hour: 22, minute: 0 }, () => {
 });
 
 // 일요일 오후 11시 59분에 초과 메세지
-schedule.scheduleJob({ dayOfWeek: 0, hour: 0, minute: 55 }, () => {
+schedule.scheduleJob({ dayOfWeek: 0, hour: 0, minute: 56 }, () => {
   monitorChannelAndAddRemindersOver();
 });
