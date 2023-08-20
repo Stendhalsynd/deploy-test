@@ -141,6 +141,7 @@ schedule.scheduleJob({ dayOfWeek: 6, hour: 22, minute: 0 }, () => {
 });
 
 // 일요일 오후 11시 59분에 초과 메세지
-schedule.scheduleJob({ dayOfWeek: 1, hour: 1, minute: 0 }, () => {
+schedule.scheduleJob({ dayOfWeek: 1, hour: 1, minute: 1 }, () => {
   monitorChannelAndAddRemindersOver();
+  console.log("실행됨");
 });
