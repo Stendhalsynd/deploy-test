@@ -23,7 +23,7 @@ function getWeekNumber() {
   const now = new Date();
   const startOfYear = new Date(now.getFullYear(), 0, 1);
   const days = Math.floor((now - startOfYear) / (24 * 60 * 60 * 1000)) + 1;
-  const weekNumber = Math.ceil(days / 7) - 31;
+  const weekNumber = Math.ceil(days / 7) - 30;
   return weekNumber;
 }
 
@@ -141,7 +141,6 @@ schedule.scheduleJob({ dayOfWeek: 6, hour: 22, minute: 0 }, () => {
 });
 
 // 일요일 오후 11시 59분에 초과 메세지
-schedule.scheduleJob({ dayOfWeek: 1, hour: 1, minute: 2 }, () => {
+schedule.scheduleJob({ dayOfWeek: 7, hour: 23, minute: 55 }, () => {
   monitorChannelAndAddRemindersOver();
-  console.log("실행됨");
 });
